@@ -23,4 +23,4 @@ exports.handler = async (event) => {
             body: JSON.stringify({ error: 'Failed Fetching DATA' }),
         };
     }
-};
+}
