@@ -55,7 +55,7 @@ function App() {
                 : <SearchPage />
             }
           </Route>
-          <Route exact path='/saved'>
+          <Route exact path='/watchlist'>
             {
               !currentUser
                 ? <Redirect to='/' />

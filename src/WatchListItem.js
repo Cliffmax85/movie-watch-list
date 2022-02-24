@@ -1,12 +1,12 @@
 import React from 'react';
 import { watchMovie } from './services/fetch-utils';
 
-export default function WatchListItem({ movie, fetchWatchLsit }) {
+export default function WatchListItem({ movie, fetchWatchList }) {
   
   async function handleClick() {
     await watchMovie(movie.id);
 
-    fetchWatchLsit();
+    await fetchWatchList();
   }
   return (
     <div onClick={handleClick} className="watchlist-item">

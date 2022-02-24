@@ -1,9 +1,11 @@
 import React from 'react';
 import Movie from './Movie';
 import WatchListItem from './WatchListItem';
+import { useLocation } from 'react-router-dom';
 
 export default function MovieList({ movies, fetchWatchlist, onWatchList }) {
-
+  const location = useLocation();
+  
   return (
     <div className='movie-list'>
       {

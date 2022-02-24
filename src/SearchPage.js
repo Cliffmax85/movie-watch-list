@@ -22,7 +22,7 @@ export default function SearchPage() {
 
   }
 
-  async function onWatchList(api_id) {
+  function onWatchList(api_id) {
     const match = watchList.find(movie => Number(movie.api_id) === Number(api_id));
 
     return Boolean(match);

@@ -7,7 +7,6 @@ exports.handler = async (event) => {
 
   const URL = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_KEY}&language=en-US&page=1&include_adult=false&query=${searchQuery}`;
   
-  console.log(URL);
 
   try {
     const response = await fetch(URL);
