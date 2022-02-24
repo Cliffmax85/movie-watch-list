@@ -1,24 +1,72 @@
-import logo from './logo.svg';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  NavLink
+} from 'react-router-dom';
 import './App.css';
+import { useState, useEffect } from 'react';
+import AuthPage from './AuthPage';
+import SearchPage from './SearchPage';
+import WatchListPage from './WatchListPage';
+import { getUser, logout } from './services/fetch-utils';
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(localStorage.getItem('supabase.auth.token'));
+
+  useEffect(() => {
+    async function getUserObject() {
+      const data = await getUser();
+      setCurrentUser(data);
+    }
+    getUserObject();
+    
+  }, []);
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className='App'>
+        {
+          currentUser &&
+          <>
+            <NavLink activeClassName="active-class" to="/search">
+              Search
+            </NavLink>
+            <NavLink activeClassName="active-class" to="/watchlist">
+              Watchlist
+            </NavLink>
+            <button onClick={logout}>Logout</button>
+          </>
+        }
+        <Switch>
+          <Route exact path='/'>
+            {
+              currentUser
+                ? <Redirect to='/search' />
+                : <AuthPage setUser={setCurrentUser} />
+            }
+          </Route>
+          <Route exact path='/search'>
+            {
+              !currentUser
+                ? <Redirect to='/' />
+                : <SearchPage />
+            }
+          </Route>
+          <Route exact path='/watchlist'>
+            {
+              !currentUser
+                ? <Redirect to='/' />
+                : <WatchListPage />
+            }
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+
+
   );
 }
 
