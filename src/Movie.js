@@ -11,6 +11,7 @@ export default function Movie({ movie, onWatchList, fetchWatchList }) {
         api_id: movie.id,
         description: movie.overview,
         poster: movie.poster_path,
+        watched: false,
       };
       
       await addToWatchList(saveMovie);
@@ -19,7 +20,7 @@ export default function Movie({ movie, onWatchList, fetchWatchList }) {
   }
   return (
     <div onClick={handleClick} className={`movie-item ${viewed} ? 'watched' : ''}` }>
-      <p>{viewed && '🔭'}</p>
+      <p>{viewed && '🌮'}</p>
       <h1>{movie.title}</h1>
       <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} />
       <h2>{movie.overview}</h2>

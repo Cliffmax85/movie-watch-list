@@ -9,7 +9,7 @@ export default function WatchListItem({ movie, fetchWatchLsit }) {
     fetchWatchLsit();
   }
   return (
-    <div onClick={handleClick} className="movie-item">
+    <div onClick={handleClick} className="watchlist-item">
       <p>{movie.watched ? '✓' : '🔭'}</p>
       <h2>{movie.title}</h2>
       <img src={`https://image.tmdb.org/t/p/original${movie.poster}`} />
