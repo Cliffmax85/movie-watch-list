@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { addToWatchList } from './services/fetch-utils';
 
 export default function Movie({ movie, onWatchList, fetchWatchList }) {
@@ -13,8 +13,8 @@ export default function Movie({ movie, onWatchList, fetchWatchList }) {
         poster: movie.poster_path,
       };
       
-    await addToWatchList(saveMovie);
-    await fetchWatchList();
+      await addToWatchList(saveMovie);
+      await fetchWatchList();
     }  
   }
   return (

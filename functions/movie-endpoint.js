@@ -3,24 +3,26 @@ const fetch = require('node-fetch');
 require('dotenv').config();
 
 exports.handler = async (event) => {
-    const query = event.queryStringParameters.searchQuery;
+  const searchQuery = event.queryStringParameters.searchQuery;
 
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_KEY}&language=en-US&page=1=${query}`;
+  const URL = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_KEY}&language=en-US&page=1&include_adult=false&query=${searchQuery}`;
+  
+  console.log(URL);
 
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      const json = JSON.stringify({ data });
-
-      return {
-          statusCode: 200,
-          body: json
-      };
-    } catch (error) {
-        console.log(error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Failed Fetching DATA' }),
-        };
-    }
-}
+  try {
+    const response = await fetch(URL);
+    const data = await response.json();
+    const json = JSON.stringify({ data });
+    console.log(json);
+    return {
+      statusCode: 200,
+      body: json
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed Fetching DATA' }),
+    };
+  }
+};
